@@ -1,7 +1,5 @@
 # Postman Web
 
-**在线体验：https://373908394-blip.github.io/postman-web/**
-
 浏览器里的 HTTP API 调试工具 —— 不用装客户端，打开网页就能构造请求、查看响应、管理请求集合与环境变量。
 
 > React 18 + TypeScript + Vite + MUI + Tailwind CSS + Zustand ｜ 纯静态部署 ｜ 数据全部存在本机浏览器
@@ -39,18 +37,25 @@ npm run preview      # 本地预览 dist
 2. **使用仓库自带的本地代理**：
 
 ```bash
-npm run proxy        # 默认 http://localhost:8787，端点 /proxy
+npm run proxy        # 默认 http://127.0.0.1:8787，端点 /proxy
 ```
 
-然后在前端「设置 → 代理」里打开开关，代理地址填 `http://localhost:8787/proxy`。
+代理是**零依赖**实现（只用 Node 内置模块），克隆后无需额外安装即可运行。
 
-代理为透传实现：把请求原样转发到 `X-Target-URL` 指向的地址，并补上 CORS 头，支持 form-data 与二进制。
+然后在前端「设置 → 代理」里：
+
+1. 打开「使用本地代理」开关；
+2. 代理地址填 `http://127.0.0.1:8787/proxy`。
+
+代理为字节级透传：把请求原样转发到 `X-Target-URL` 指向的地址，自己处理 OPTIONS 预检与 3xx 重定向，并摘掉 `Origin`/`Referer` 以免触发目标站 WAF；支持 form-data 上传与二进制响应。
+
+排障：浏览器访问 `http://127.0.0.1:8787/health` 应返回 `{"ok":true,...}`。若打不开，说明代理没起来（看终端里的 `EADDRINUSE` 之类报错）；若健康检查正常但仍报网络错误，把目标地址临时贴到浏览器地址栏验证它本身是否可达。
 
 ## 部署到 GitHub Pages
 
 仓库已带 `.github/workflows/deploy.yml`：推送到 `main` 分支即自动构建并发布。
 
-首次使用需在仓库 **Settings → Pages → Source** 选择 **GitHub Actions**。
+首次使用需在仓库 **Settings → Pages → Source** 选择 **GitHub Actions**（工作流里的 `actions/configure-pages` 也会尝试自动开启）。
 
 ## 快捷键
 
@@ -92,7 +97,7 @@ src/
 ├── theme/            MUI 主题
 ├── types/            领域模型
 └── utils/            变量插值、JSON 词法、cURL、格式化
-server/proxy.js       本地 CORS 代理（Express）
+server/proxy.js       本地 CORS 代理（零依赖，仅用 Node 内置模块）
 docs/PRD.md           产品需求文档
 ```
 
