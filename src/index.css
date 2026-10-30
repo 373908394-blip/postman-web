@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+}
+
+/* ---------- 滚动条 ---------- */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.35);
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(128, 128, 128, 0.55);
+  background-clip: content-box;
+}
+
+/* ---------- 代码/JSON 展示 ---------- */
+.code-area {
+  font-family: 'JetBrains Mono', SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+  font-size: 12.5px;
+  line-height: 1.65;
+  tab-size: 2;
+  white-space: pre;
+  word-break: normal;
+  overflow: auto;
+}
+.code-area.wrap {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.tok-key {
+  color: #a626a4;
+}
+.tok-string {
+  color: #2e7d32;
+}
+.tok-number {
+  color: #b26a00;
+}
+.tok-boolean {
+  color: #1a73e8;
+}
+.tok-null {
+  color: #9e9e9e;
+}
+.tok-punct {
+  color: #8a8f98;
+}
+
+.dark .tok-key {
+  color: #d19af5;
+}
+.dark .tok-string {
+  color: #8bd17c;
+}
+.dark .tok-number {
+  color: #f0b06a;
+}
+.dark .tok-boolean {
+  color: #74b9ff;
+}
+.dark .tok-null {
+  color: #8b93a1;
+}
+.dark .tok-punct {
+  color: #9aa4b2;
+}
+
+/* ---------- 键值行 ---------- */
+.kv-row:hover .kv-row-actions {
+  opacity: 1;
+}
+.kv-row-actions {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+/* 隐藏 number input 的上下箭头 */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
