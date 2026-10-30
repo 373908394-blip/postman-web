@@ -1,5 +1,7 @@
 # Postman Web
 
+**在线体验：https://373908394-blip.github.io/postman-web/**
+
 浏览器里的 HTTP API 调试工具 —— 不用装客户端，打开网页就能构造请求、查看响应、管理请求集合与环境变量。
 
 > React 18 + TypeScript + Vite + MUI + Tailwind CSS + Zustand ｜ 纯静态部署 ｜ 数据全部存在本机浏览器
@@ -48,9 +50,7 @@ npm run proxy        # 默认 http://localhost:8787，端点 /proxy
 
 仓库已带 `.github/workflows/deploy.yml`：推送到 `main` 分支即自动构建并发布。
 
-首次使用需在仓库 **Settings → Pages → Source** 选择 **GitHub Actions**（工作流里的 `actions/configure-pages` 也会尝试自动开启）。
-
-线上地址：https://373908394-blip.github.io/postman-web/
+首次使用需在仓库 **Settings → Pages → Source** 选择 **GitHub Actions**。
 
 ## 快捷键
 
