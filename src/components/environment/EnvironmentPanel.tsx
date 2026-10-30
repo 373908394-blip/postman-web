@@ -62,7 +62,10 @@ export default function EnvironmentPanel(): JSX.Element {
 
   const removeRow = (rowId: string): void => {
     if (!active) return;
-    setVariables(active.id, setTrailingSafe(active.variables.filter((row) => row.id !== rowId)));
+    setVariables(
+      active.id,
+      ensureTrailing(active.variables.filter((row) => row.id !== rowId)),
+    );
   };
 
   const startRename = (): void => {
